@@ -25,3 +25,15 @@ function addTask($task_name) {
     file_put_contents($file, json_encode($tasks, JSON_PRETTY_PRINT));
 }
 
+function getAllTasks() {
+    $file = __DIR__ . '/tasks.txt';
+
+    if (!file_exists($file)) {
+        return [];
+    }
+
+    $tasks = json_decode(file_get_contents($file), true);
+
+    return is_array($tasks) ? $tasks : [];
+}
+
