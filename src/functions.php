@@ -105,7 +105,8 @@ function subscribeEmail($email) {
         <p><a id="verification-link" href="' . $verification_link . '">Verify Subscription</a></p>
     ';
 
-    mail($email, $subject, $message, $headers);
+    // Use this temporarily for local testing:
+    file_put_contents('emails_log.txt', "To: $to\nSubject: $subject\n$message\n\n", FILE_APPEND);
 }
 function verifySubscription($email, $code) {
     $pending_file = __DIR__ . '/pending_subscriptions.txt';
@@ -168,8 +169,8 @@ function sendTaskEmail($email, $pending_tasks) {
         <p><a id="unsubscribe-link" href="' . $unsubscribe_link . '">Unsubscribe from notifications</a></p>
     ';
 
-    // Send email
-    mail($email, $subject, $message, $headers);
+    // Use this temporarily for local testing:
+    file_put_contents('emails_log.txt', "To: $to\nSubject: $subject\n$message\n\n", FILE_APPEND);
 }
 function sendTaskReminders() {
     $subscribers_file = __DIR__ . '/subscribers.txt';
